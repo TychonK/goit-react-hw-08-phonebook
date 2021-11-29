@@ -1,2 +1,2 @@
-# goit-react-hw-08-phonebook
- GoIT React homeworks 08
+# goit-react-hw-04-hooks-phonebook
+ GoIT react homework 4 - phonebook
