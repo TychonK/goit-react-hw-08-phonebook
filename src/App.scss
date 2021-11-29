@@ -87,3 +87,15 @@ li {
     display: flex;
     vertical-align: middle;
 }
+
+nav{
+  display: flex;
+}
+
+.nav-link {
+  font-size: 20px;
+}
+
+.active {
+  color: black;
+}
