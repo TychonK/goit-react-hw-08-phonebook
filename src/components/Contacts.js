@@ -56,9 +56,9 @@ function Contacts({ contacts, filter, loading, onLoad }) {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts,
-    filter: state.filter,
-    loading: state.loading,
+    contacts: state.contacts.contacts,
+    filter: state.contacts.filter,
+    loading: state.contacts.loading,
   }
 }
 

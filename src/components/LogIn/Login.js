@@ -17,17 +17,17 @@ export default function Login() {
           </button>
           <form className="register-form">
             <label className="register-label">
-                <p class="label-txt">ENTER YOUR EMAIL</p>
-                <input type="text" class="register-input"/>
-                <div class="line-box">
-                <div class="line"></div>
+                <p className="label-txt">ENTER YOUR EMAIL</p>
+                <input type="text" className="register-input" type="email"/>
+                <div className="line-box">
+                <div className="line"></div>
                 </div>
             </label>
             <label className="register-label">
-                <p class="label-txt">ENTER YOUR PASSWORD</p>
-                <input type="text" class="register-input"/>
-                <div class="line-box">
-                <div class="line"></div>
+                <p className="label-txt">ENTER YOUR PASSWORD</p>
+                <input type="text" className="register-input"/>
+                <div className="line-box">
+                <div className="line"></div>
                 </div>
             </label>
             <button type="submit" className="register-button">Log in</button>

@@ -6,7 +6,7 @@ import userReducer from './registration'
 
 const initialState = { contacts: [], filter: '', loading: false, }
 
-const reducer = createReducer(initialState, {
+const contacts = createReducer(initialState, {
     [actions.filter]: (state, action) => {
         return {
             ...state,
@@ -43,7 +43,7 @@ const reducer = createReducer(initialState, {
 })
 
 const store = configureStore({
-    reducer: { reducer, userReducer},
+    reducer: { contacts, userReducer},
     devTools: process.env.NODE_ENV === "development",
 })
 

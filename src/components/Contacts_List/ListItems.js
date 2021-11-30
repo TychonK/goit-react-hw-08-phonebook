@@ -22,8 +22,8 @@ function ListItems({ arr, filterWord, deleteContact }) {
 
 const mapStateToProps = state => {
     return {
-        arr: state.contacts,
-        filterWord: state.filter,
+        arr: state.contacts.contacts,
+        filterWord: state.contacts.filter,
     }
 }
 

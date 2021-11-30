@@ -48,14 +48,14 @@ export default function Register() {
           <form className="register-form" onSubmit={handleSubmit} onChange={handleChange}>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR EMAIL</p>
-                    <input type="text" className="register-input" name="name" value={ name }/>
+                    <input type="text" className="register-input" name="mail" value={ mail } type="email"/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>
             </label>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR NAME</p>
-                <input type="text" className="register-input" name="mail" value={ mail }/>
+                <input type="text" className="register-input" name="name" value={ name }/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>
