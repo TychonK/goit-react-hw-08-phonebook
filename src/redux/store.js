@@ -2,6 +2,7 @@
 import { configureStore, createReducer } from '@reduxjs/toolkit'
 import * as actions from './actions'
 import logger from 'redux-logger'
+import userReducer from './registration'
 
 const initialState = { contacts: [], filter: '', loading: false, }
 
@@ -42,7 +43,7 @@ const reducer = createReducer(initialState, {
 })
 
 const store = configureStore({
-    reducer: reducer,
+    reducer: { reducer, userReducer},
     devTools: process.env.NODE_ENV === "development",
 })
 

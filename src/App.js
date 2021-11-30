@@ -7,7 +7,8 @@ import Navigation from './components/Navigation'
 import NotFound from './components/NotFound';
 import HomePage from './components/HomePage';
 import Contacts from './components/Contacts';
-import Register from './components/Register/Register'
+import Register from './components/Register/Register';
+import Login from './components/LogIn/Login';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/register" element={<Register/>} />
-          {/* <Route exact path="/login" component={LogIn} /> */}
+          <Route path="/login" element={<Login/>} />
           <Route path="/contacts" element={<Contacts/>} />
           <Route component={NotFound}/>
         </Routes>
