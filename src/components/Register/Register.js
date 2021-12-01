@@ -4,11 +4,9 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router';
 
-import { setUser } from '../../redux/registrationStore'
-
 import { connect, useDispatch, useSelector } from "react-redux";
 
-import * as registerActions from '../../redux/registerActions'
+import * as registerActions from '../../redux/authActions'
 
 import Loader from 'react-loader-spinner';
 
@@ -18,7 +16,7 @@ function Register({loading, onSubmit}) {
     const [ password, setPassword ] = useState('')
 
     //const { location } = useSelector(state=>state)
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -35,7 +33,6 @@ function Register({loading, onSubmit}) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const userObj = { name: name, email: mail, password: password }
-        dispatch(setUser(userObj))
         await onSubmit(userObj)
         setName('')
         setMail('')

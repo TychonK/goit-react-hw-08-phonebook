@@ -2,7 +2,7 @@
 import { configureStore, createReducer } from '@reduxjs/toolkit'
 import * as actions from './contactsActions'
 import logger from 'redux-logger'
-import userReducer from './registrationStore'
+import userReducer from './authStore'
 
 const initialState = { contacts: [], filter: '', loading: false, }
 

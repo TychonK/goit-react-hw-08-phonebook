@@ -13,14 +13,28 @@ export const fetchOnUserRegister = args => dispatch => {
     dispatch(fetchStart())
     console.log(args)
     axios.post(`${baseUrl}/users/signup`, args)
-        .then(response => response)
+        .then(response => response.data)
         .then(data => {
-            dispatch(fetchSuccess())
-            console.log(data)
+            dispatch(fetchSuccess(data))
             swal("Congratulations!", `You have created an account!`, "success");
         })
         .catch(err => {
             dispatch(fetchFailure())
             swal("Oops!", `Error ${err.response.status} occured.`, "error");
+        })
+}
+
+export const fetchOnUserLogin = args => dispatch => {
+    dispatch(fetchStart())
+    console.log(args)
+    axios.post(`${baseUrl}/users/login`, args)
+        .then(response => response.data)
+        .then(data => {
+            dispatch(fetchSuccess(data))
+            swal(`Hello, ${data.user.name}`, `You have logged into your account!`, "success");
+        })
+        .catch(err => {
+            dispatch(fetchFailure())
+            swal("Oops! Wrong mail or password.", `Error ${err.response.status} occured.`, "error");
         })
 }

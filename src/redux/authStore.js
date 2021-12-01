@@ -1,17 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import * as registerActions from './registerActions'
+import * as registerActions from './authActions'
 
 const userSlice = createSlice({
     name: 'register',
     initialState: {
-        users: {},
+        user: { name: '', email: '' },
+        token: '',
+        isLoggedIn: false,
         loading: false,
-    },
-    reducers: {
-        setUser: (state, action) => {
-            state.users = action.payload;
-        },
     },
     extraReducers: {
         [registerActions.fetchStart]: (state, action) => {
@@ -21,9 +18,13 @@ const userSlice = createSlice({
             }
         },
         [registerActions.fetchSuccess]: (state, action) => {
+            console.log(action.payload)
             return {
                 ...state,
                 loading: false,
+                isLoggedIn: true,
+                token: action.payload.token,
+                user: {name: action.payload.user.name, email: action.payload.user.email,},
             }
         },
         [registerActions.fetchFailure]: (state, action) => {
