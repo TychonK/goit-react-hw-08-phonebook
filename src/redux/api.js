@@ -1,0 +1,1 @@
+export const baseUrl = 'https://connections-api.herokuapp.com';

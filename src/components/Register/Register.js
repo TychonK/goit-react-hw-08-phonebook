@@ -4,16 +4,20 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router';
 
-import { setUser } from '../../redux/registration'
+import { setUser } from '../../redux/registrationStore'
 
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 
-export default function Register() {
+import * as registerActions from '../../redux/registerActions'
+
+import Loader from 'react-loader-spinner';
+
+function Register({loading, onSubmit}) {
     const [ name, setName ] = useState('')
     const [ mail, setMail ] = useState('')
     const [ password, setPassword ] = useState('')
 
-    const { location } = useSelector(state=>state)
+    //const { location } = useSelector(state=>state)
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -28,13 +32,11 @@ export default function Register() {
         e.target.name === "password" && setPassword(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (name === '' || mail === '' || password === '') {
-            alert("Enter complete data please")
-            return
-        }
-        dispatch(setUser({name: name, mail: mail, password: password }))
+        const userObj = { name: name, email: mail, password: password }
+        dispatch(setUser(userObj))
+        await onSubmit(userObj)
         setName('')
         setMail('')
         setPassword('')
@@ -44,25 +46,32 @@ export default function Register() {
         <>
           <button type="button" onClick={handleGoBack} className="btn btn-primary hBack">
               &larr; Go back 
-          </button>
+            </button> {loading &&
+                <div className="register-loader_backdrop">
+                    <Loader
+                        className="register-loader"
+                        type="Puff"
+                        color="#00BFFF"
+                    />
+                </div>}
           <form className="register-form" onSubmit={handleSubmit} onChange={handleChange}>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR EMAIL</p>
-                    <input type="text" className="register-input" name="mail" value={ mail } type="email"/>
+                    <input required type="text" className="register-input" name="mail" value={ mail } type="email"/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>
             </label>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR NAME</p>
-                <input type="text" className="register-input" name="name" value={ name }/>
+                    <input required type="text" className="register-input" name="name" value={ name }/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>
             </label>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR PASSWORD</p>
-                <input type="text" className="register-input" name="password" value={ password }/>
+                    <input required pattern=".{7,}" title="Enter minimum 7 characters" type="text" className="register-input" name="password" value={ password }/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>
@@ -72,3 +81,17 @@ export default function Register() {
         </>
     )
 }
+
+const mapStateToProps = state => {
+  return {
+    loading: state.userReducer.loading,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmit: (userObj) => dispatch(registerActions.fetchOnUserRegister(userObj))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

@@ -7,7 +7,7 @@ import Filter from './Filter/Filter'
 import Loader from "react-loader-spinner";
 
 import { connect } from 'react-redux'
-import * as actions from '../redux/actions'
+import * as actions from '../redux/contactsActions'
 
 function Contacts({ contacts, filter, loading, onLoad }) {
     useEffect(() => {

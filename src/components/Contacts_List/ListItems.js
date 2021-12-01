@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import * as actions from '../../redux/actions'
+import * as actions from '../../redux/contactsActions'
 
 function ListItems({ arr, filterWord, deleteContact }) {
     const listMarkup = arr.filter((val) => {

@@ -1,8 +1,8 @@
 // import { createStore } from 'redux';
 import { configureStore, createReducer } from '@reduxjs/toolkit'
-import * as actions from './actions'
+import * as actions from './contactsActions'
 import logger from 'redux-logger'
-import userReducer from './registration'
+import userReducer from './registrationStore'
 
 const initialState = { contacts: [], filter: '', loading: false, }
 
@@ -43,7 +43,7 @@ const contacts = createReducer(initialState, {
 })
 
 const store = configureStore({
-    reducer: { contacts, userReducer},
+    reducer: { contacts, userReducer },
     devTools: process.env.NODE_ENV === "development",
 })
 
