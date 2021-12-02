@@ -78,7 +78,7 @@ function Register({loading, isLoggedIn, onSubmit}) {
             </label>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR PASSWORD</p>
-                    <input required pattern=".{7,}" title="Enter minimum 7 characters" type="text" className="register-input" name="password" value={ password }/>
+                    <input required pattern=".{7,}" title="Enter minimum 7 characters" type="password" className="register-input" name="password" value={ password }/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>

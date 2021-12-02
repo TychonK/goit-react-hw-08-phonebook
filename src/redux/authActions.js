@@ -1,9 +1,11 @@
-import { createAction } from '@reduxjs/toolkit'
+import { createAction, isRejectedWithValue } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 import { baseUrl } from './api'
 
 import swal from 'sweetalert';
+
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 axios.defaults.baseURL = `${baseUrl}`
 
@@ -68,3 +70,20 @@ export const fetchOnUserLogout = config => dispatch => {
             swal("Oops! Something went wrong", `Error ${err.response.status} occured.`, "error");
         })
 }
+
+export const fetchCurrentUser = createAsyncThunk("auth/REFRESH", async(_, thunkAPI) => {
+    const state = thunkAPI.getState()
+    const persistedToken = state.userReducer.token
+
+    if (persistedToken === '') {
+        console.log("no token = no fetch")
+        return thunkAPI.isRejectedWithValue()
+    }
+    token.set(persistedToken)
+    try {
+        const {data} = await axios.get('/users/current')
+        return data
+    } catch (err) {
+        console.log(err)
+    }
+})

@@ -66,7 +66,7 @@ function Login({loading, isLoggedIn, onSubmit}) {
             </label>
             <label className="register-label">
                 <p className="label-txt">ENTER YOUR PASSWORD</p>
-                    <input required type="text" className="register-input"  name="password" value={ password }/>
+                    <input required type="password" className="register-input" name="password" value={ password }/>
                 <div className="line-box">
                 <div className="line"></div>
                 </div>

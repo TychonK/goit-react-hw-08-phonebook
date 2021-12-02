@@ -47,6 +47,10 @@ const userSlice = createSlice({
                 loading: false,
             }
         },
+        [registerActions.fetchCurrentUser.fulfilled]: (state, action) => {
+            state.user = action.payload;
+            state.isLoggedIn = true;
+        }
     }
 });
 

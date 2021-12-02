@@ -4,6 +4,9 @@ import * as actions from './contactsActions'
 import logger from 'redux-logger'
 import userReducer from './authStore'
 
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
 const initialState = { contacts: [], filter: '', loading: false, }
 
 const contacts = createReducer(initialState, {
@@ -42,10 +45,21 @@ const contacts = createReducer(initialState, {
     },
 })
 
+const authPersistConfig = {
+    key: "auth",
+    storage,
+    whitelist: ['token'],
+}
+
 const store = configureStore({
-    reducer: { contacts, userReducer },
+    reducer: {
+        contacts: contacts,
+        userReducer: persistReducer(authPersistConfig, userReducer)
+    },
     devTools: process.env.NODE_ENV === "development",
 })
+
+export const persistor = persistStore(store)
 
 export default store;
 
