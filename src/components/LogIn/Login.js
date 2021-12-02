@@ -1,6 +1,6 @@
 import '../Register/Register.scss'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router';
 
@@ -10,7 +10,7 @@ import * as registerActions from '../../redux/authActions'
 
 import Loader from 'react-loader-spinner';
 
-function Login({loading, onSubmit}) {
+function Login({loading, isLoggedIn, onSubmit}) {
     const [ mail, setMail ] = useState('')
     const [ password, setPassword ] = useState('')
 
@@ -31,6 +31,7 @@ function Login({loading, onSubmit}) {
         e.preventDefault()
         const userLoginObj = { email: mail, password: password }
         await onSubmit(userLoginObj)
+        navigate("/contacts")
         setMail('')
         setPassword('')
     }
@@ -72,6 +73,7 @@ function Login({loading, onSubmit}) {
 const mapStateToProps = state => {
   return {
     loading: state.userReducer.loading,
+    isLoggedIn: state.userReducer.isLoggedIn,
   }
 }
 

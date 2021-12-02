@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 
 import { connect, useDispatch, useSelector } from "react-redux";
 
-import * as registerActions from '../../redux/authActions'
+import * as authActions from '../../redux/authActions'
 
 import Loader from 'react-loader-spinner';
 
@@ -87,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: (userObj) => dispatch(registerActions.fetchOnUserRegister(userObj))
+    onSubmit: (userObj) => dispatch(authActions.fetchOnUserRegister(userObj))
   }
 }
 

@@ -33,6 +33,19 @@ const userSlice = createSlice({
                 loading: false,
             }
         },
+        [registerActions.logoutFetchSuccess]: (state, action) => {
+            return {
+                ...state,
+                loading: false,
+                isLoggedIn: false,
+            }
+        },
+        [registerActions.logoutFetchFailure]: (state, action) => {
+            return {
+                ...state,
+                loading: false,
+            }
+        },
     }
 });
 
