@@ -1,6 +1,6 @@
 import './Register.scss'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router';
 
@@ -12,7 +12,7 @@ import Loader from 'react-loader-spinner';
 
 import { Link } from 'react-router-dom'
 
-function Register({loading, onSubmit}) {
+function Register({loading, isLoggedIn, onSubmit}) {
     const [ name, setName ] = useState('')
     const [ mail, setMail ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -21,6 +21,14 @@ function Register({loading, onSubmit}) {
     //const dispatch = useDispatch();
 
     const navigate = useNavigate();
+  
+    useEffect(() => {
+      if (isLoggedIn) {
+        navigate("/contacts")
+      } else {
+        return
+      }
+    }, [isLoggedIn])
 
     const handleGoBack = () => {
      navigate(-1)
@@ -85,6 +93,7 @@ function Register({loading, onSubmit}) {
 const mapStateToProps = state => {
   return {
     loading: state.userReducer.loading,
+    isLoggedIn: state.userReducer.isLoggedIn
   }
 }
 

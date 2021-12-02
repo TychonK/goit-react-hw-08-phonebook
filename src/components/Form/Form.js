@@ -29,7 +29,7 @@ function Form({ onSubmit, existing }) {
       
         const obj = {
           name: name,
-          phone: number,
+          number: number,
         }
 
         onSubmit(obj)

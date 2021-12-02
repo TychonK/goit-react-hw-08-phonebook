@@ -27,17 +27,20 @@ import axios from 'axios'
 
 export const filter = createAction('filter/changeFilter')
 
-export const fetchStart = createAction('page/FETCH_START')
-export const fetchSuccess = createAction('page/FETCH_SUCCESS')
-export const fetchFailure = createAction('page/FETCH_FAILURE')
-export const deleteFetchSuccess = createAction('page/FETCH_DELETE_SUCCESS')
+export const fetchStart = createAction('contacts/FETCH_START')
+export const fetchSuccess = createAction('contacts/FETCH_SUCCESS')
+export const fetchFailure = createAction('contacts/FETCH_FAILURE')
+export const deleteFetchSuccess = createAction('contacts/FETCH_DELETE_SUCCESS')
 
 export const fetchOnPageLoad = args => dispatch => {
   dispatch(fetchStart());
 
-  axios('https://6196735baf46280017e7e0cd.mockapi.io/phonebook/contacts')
+  axios.get('/contacts')
     .then(r => r.data)
-    .then(data => dispatch(fetchSuccess(data)))
+      .then(data => {
+          console.log(data)
+          dispatch(fetchSuccess(data))
+      })
       .catch(err => {
           console.log("Error fetching contacts:", err)
           dispatch(fetchFailure(err))
@@ -45,11 +48,13 @@ export const fetchOnPageLoad = args => dispatch => {
 };
 
 export const addContact = args => dispatch => {
-    axios
-        .post('https://6196735baf46280017e7e0cd.mockapi.io/phonebook/contacts', args)
-        .then(dispatch(fetchStart()))
+    dispatch(fetchStart())
+    axios.post('/contacts', args)
         .then(r => r.data)
-        .then(data => dispatch(fetchSuccess([data])))
+        .then(data => {
+            console.log(data)
+            dispatch(fetchSuccess([data]))
+        })
       .catch(err => {
           console.log("Error posting contact:", err)
           dispatch(fetchFailure(err))
@@ -57,12 +62,12 @@ export const addContact = args => dispatch => {
 }
 
 export const deleteContact = args => dispatch => {
-    const contact = args.target.id
+    const contactId = args.target.id
     axios
-        .delete(`https://6196735baf46280017e7e0cd.mockapi.io/phonebook/contacts/${contact}`)
+        .delete(`/contacts/${contactId}`)
         .then(dispatch(fetchStart()))
         .then(r => r.data)
-        .then(data => dispatch(deleteFetchSuccess(data)))
+        .then(data => dispatch(deleteFetchSuccess(contactId)))
         .catch(err => {
             console.log("Error deleting contact:", err)
             dispatch(fetchFailure(err))

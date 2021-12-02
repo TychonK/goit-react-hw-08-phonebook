@@ -18,7 +18,6 @@ const userSlice = createSlice({
             }
         },
         [registerActions.fetchSuccess]: (state, action) => {
-            console.log(action.payload)
             return {
                 ...state,
                 loading: false,
@@ -36,8 +35,10 @@ const userSlice = createSlice({
         [registerActions.logoutFetchSuccess]: (state, action) => {
             return {
                 ...state,
-                loading: false,
+                user: { name: '', email: '' },
+                token: '',
                 isLoggedIn: false,
+                loading: false,
             }
         },
         [registerActions.logoutFetchFailure]: (state, action) => {

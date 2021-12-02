@@ -3,9 +3,18 @@ import axios from 'axios'
 
 import { baseUrl } from './api'
 
-import { useSelector } from 'react-redux';
-
 import swal from 'sweetalert';
+
+axios.defaults.baseURL = `${baseUrl}`
+
+const token = {
+    set(token) {
+        axios.defaults.headers.common.Authorization = `${token}`
+    },
+    unset() {
+        axios.defaults.headers.common.Authorization = ''
+    },
+}
 
 export const fetchStart = createAction('auth/FETCH_START')
 export const fetchSuccess = createAction('auth/FETCH_SUCCESS')
@@ -13,11 +22,11 @@ export const fetchFailure = createAction('auth/FETCH_FAILURE')
 
 export const fetchOnUserRegister = args => dispatch => {
     dispatch(fetchStart())
-    console.log(args)
-    axios.post(`${baseUrl}/users/signup`, args)
+    axios.post(`/users/signup`, args)
         .then(response => response.data)
         .then(data => {
             dispatch(fetchSuccess(data))
+            token.set(data.token)
             swal("Congratulations!", `You have created an account!`, "success");
         })
         .catch(err => {
@@ -28,11 +37,11 @@ export const fetchOnUserRegister = args => dispatch => {
 
 export const fetchOnUserLogin = args => dispatch => {
     dispatch(fetchStart())
-    console.log(args)
-    axios.post(`${baseUrl}/users/login`, args)
+    axios.post(`/users/login`, args)
         .then(response => response.data)
         .then(data => {
             dispatch(fetchSuccess(data))
+            token.set(data.token)
             swal(`Hello, ${data.user.name}`, `You have logged into your account!`, "success");
         })
         .catch(err => {
@@ -46,16 +55,16 @@ export const logoutFetchFailure = createAction('logout/FETCH_FAILURE')
 
 export const fetchOnUserLogout = config => dispatch => {
     dispatch(fetchStart())
-    console.log(config)
-    axios.post(`${baseUrl}/users/logout`, null, { headers: config })
+    axios.post(`/users/logout`, null)
         .then(response => response)
         .then(data => {
             dispatch(logoutFetchSuccess())
             swal(`Bye!`, `You have logged out of your account!`, "success");
+            token.unset()
         })
         .catch(err => {
             dispatch(logoutFetchFailure())
             console.log(err)
-            //swal("Oops! Something went wrong", `Error ${err.response.status} occured.`, "error");
+            swal("Oops! Something went wrong", `Error ${err.response.status} occured.`, "error");
         })
 }

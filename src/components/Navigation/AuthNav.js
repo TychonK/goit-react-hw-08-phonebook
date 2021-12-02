@@ -2,17 +2,19 @@ import * as authActions from '../../redux/authActions'
 
 import Loader from 'react-loader-spinner';
 
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
+
+import { useEffect } from 'react'
+
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function AuthNav({ userName, loading, onLogout }) {
 
-    const userToken = useSelector(state => state.userReducer.token)
+  const navigate = useNavigate()
     
     const handleLogOut = () => {
-        const headersObj = {
-            authorization: `${userToken}`,
-        }
-        onLogout(headersObj)
+      onLogout()
+      navigate("/")
     }
 
     return (
@@ -24,7 +26,8 @@ function AuthNav({ userName, loading, onLogout }) {
                 type="Puff"
                 color="#00BFFF"
             />
-        </div>}
+          </div>}
+         <NavLink to="/contacts" className="nav-link">Contacts</NavLink>
         <div className="auth_content">
             <p className="welcome-text">Welcome, <strong>{ userName }</strong>!</p>
             <button type="button" className="btn btn-primary hBack log-out_button" onClick={handleLogOut}>Log Out</button>

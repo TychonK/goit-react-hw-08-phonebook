@@ -71,7 +71,7 @@ function Login({loading, isLoggedIn, onSubmit}) {
                 <div className="line"></div>
                 </div>
             </label>
-            <button type="submit" className="register-button">Log in</button>
+            <button type="submit" className="register-button">Log-in</button>
           </form>
         </>
     )

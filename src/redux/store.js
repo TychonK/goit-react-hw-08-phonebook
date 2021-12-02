@@ -33,7 +33,7 @@ const contacts = createReducer(initialState, {
         }
     },
     [actions.deleteFetchSuccess]: (state, action) => {
-        const newContacts = state.contacts.filter(contact => contact.name != action.payload.name)
+        const newContacts = state.contacts.filter(contact => contact.id != action.payload)
         return {
             ...state,
             loading: false,
