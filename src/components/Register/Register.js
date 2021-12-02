@@ -10,6 +10,8 @@ import * as authActions from '../../redux/authActions'
 
 import Loader from 'react-loader-spinner';
 
+import { Link } from 'react-router-dom'
+
 function Register({loading, onSubmit}) {
     const [ name, setName ] = useState('')
     const [ mail, setMail ] = useState('')
@@ -73,7 +75,8 @@ function Register({loading, onSubmit}) {
                 <div className="line"></div>
                 </div>
             </label>
-            <button type="submit" className="register-button">Register</button>
+          <button type="submit" className="register-button">Register</button>
+          <Link to="/login" className="register-button login-link"> Log-in </Link>
           </form>
         </>
     )

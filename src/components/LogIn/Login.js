@@ -17,6 +17,14 @@ function Login({loading, isLoggedIn, onSubmit}) {
     //const dispatch = useDispatch();
 
     const navigate = useNavigate();
+  
+    useEffect(() => {
+      if (isLoggedIn) {
+        navigate("/contacts")
+      } else {
+        return
+      }
+    }, [isLoggedIn])
 
     const handleGoBack = () => {
      navigate(-1)
@@ -31,7 +39,6 @@ function Login({loading, isLoggedIn, onSubmit}) {
         e.preventDefault()
         const userLoginObj = { email: mail, password: password }
         await onSubmit(userLoginObj)
-        navigate("/contacts")
         setMail('')
         setPassword('')
     }

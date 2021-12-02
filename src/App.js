@@ -4,7 +4,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import AppBar from './components/Navigation/AppBar'
-import NotFound from './components/NotFound';
+import NotFound from './components/Not_Found/NotFound';
 import HomePage from './components/HomePage';
 import Contacts from './components/Contacts';
 import Register from './components/Register/Register';
@@ -19,7 +19,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/contacts" element={<Contacts/>} />
-          <Route component={NotFound}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>
     )
