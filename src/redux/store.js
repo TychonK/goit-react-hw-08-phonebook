@@ -1,7 +1,7 @@
 // import { createStore } from 'redux';
 import { configureStore, createReducer } from '@reduxjs/toolkit'
 import * as actions from './contactsActions'
-import logger from 'redux-logger'
+import * as registerActions from './authActions'
 import userReducer from './authStore'
 
 import { persistStore, persistReducer } from 'redux-persist'
@@ -41,6 +41,12 @@ const contacts = createReducer(initialState, {
             ...state,
             loading: false,
             contacts: newContacts
+        }
+    },
+    [registerActions.logoutFetchSuccess]: (state, action) => {
+        return {
+            ...state,
+            contacts: []
         }
     },
 })

@@ -8,7 +8,7 @@ export default function PrivateRoute({children}) {
     console.log(isLoggedIn)
     if (!isLoggedIn) {
         Swal.fire('You are not logged in yet',
-            `Please login or create and accound before accessing your contacts`,
+            `Please login or create an accound before accessing your contacts`,
             'question')
     }
     return (
