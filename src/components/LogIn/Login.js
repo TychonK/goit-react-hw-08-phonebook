@@ -20,7 +20,7 @@ function Login({loading, isLoggedIn, onSubmit}) {
   
     useEffect(() => {
       if (isLoggedIn) {
-        navigate("/contacts")
+        navigate("/")
       } else {
         return
       }

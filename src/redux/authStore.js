@@ -9,6 +9,7 @@ const userSlice = createSlice({
         token: '',
         isLoggedIn: false,
         loading: false,
+        isFetchingCurrentUser: false,
     },
     extraReducers: {
         [registerActions.fetchStart]: (state, action) => {
@@ -47,10 +48,17 @@ const userSlice = createSlice({
                 loading: false,
             }
         },
+        [registerActions.fetchCurrentUser.pending]: (state, action) => {
+            state.isFetchingCurrentUser = true;
+        },
         [registerActions.fetchCurrentUser.fulfilled]: (state, action) => {
             state.user = action.payload;
             state.isLoggedIn = true;
-        }
+            state.isFetchingCurrentUser = false;
+        },
+        [registerActions.fetchCurrentUser.rejected]: (state, action) => {
+            state.isFetchingCurrentUser = false;
+        },
     }
 });
 

@@ -9,6 +9,7 @@ function Filter({handleSearch}) {
             name="nameSearch"
             placeholder="Enter name"
             onChange={handleSearch}
+            className="form-control filter-input"
         />
     )
 }

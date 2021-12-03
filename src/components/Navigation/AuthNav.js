@@ -4,9 +4,7 @@ import Loader from 'react-loader-spinner';
 
 import { connect } from 'react-redux'
 
-import { useEffect } from 'react'
-
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function AuthNav({ userName, loading, onLogout }) {
 
@@ -27,7 +25,6 @@ function AuthNav({ userName, loading, onLogout }) {
                 color="#00BFFF"
             />
           </div>}
-         <NavLink to="/contacts" className="nav-link">Contacts</NavLink>
         <div className="auth_content">
             <p className="welcome-text">Welcome, <strong>{ userName }</strong>!</p>
             <button type="button" className="btn btn-primary hBack log-out_button" onClick={handleLogOut}>Log Out</button>

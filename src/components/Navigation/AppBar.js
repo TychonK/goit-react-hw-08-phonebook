@@ -13,7 +13,8 @@ export default function AppBar() {
     return (
         <>
         <nav className="navigation-bar">
-            <NavLink to="/" className="nav-link">Home</NavLink>
+                <NavLink to="/" className="nav-link">Home</NavLink>
+                <NavLink to="/contacts" className="nav-link">Contacts</NavLink>
                 {isLoggedIn ? <AuthNav userName={ userName } /> : <DefaultNav />}
         </nav>
         <hr />
